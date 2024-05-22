@@ -1,15 +1,16 @@
-package com.example.ZUZEX_test.controllers;
+package ru.below.effective_modile_test.controllers;
 
-import com.example.ZUZEX_test.dto.AuthenticationRequest;
-import com.example.ZUZEX_test.dto.AuthenticationResponse;
-import com.example.ZUZEX_test.dto.RegisterRequest;
-import com.example.ZUZEX_test.services.AuthenticationService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.below.effective_modile_test.dto.AuthenticationRequest;
+import ru.below.effective_modile_test.dto.AuthenticationResponse;
+import ru.below.effective_modile_test.dto.RegisterRequest;
+import ru.below.effective_modile_test.services.AuthenticationService;
 
 @RestController
 @RequiredArgsConstructor

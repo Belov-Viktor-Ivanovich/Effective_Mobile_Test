@@ -1,12 +1,13 @@
-package com.example.ZUZEX_test.repositories;
+package ru.below.effective_modile_test.repositories;
 
-import com.example.ZUZEX_test.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import ru.below.effective_modile_test.models.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    public Optional<User> findUserByName(String name);
-    public Optional<List<User>> findUsersByHouseId(Long id);
+public interface UserRepository extends JpaRepository<User, UUID> {
+    public Optional<User> findUsersByName(String name);
+    //public Optional<User> findUsersByPhones(String email);
 }

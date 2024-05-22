@@ -1,18 +1,19 @@
-package com.example.ZUZEX_test.services;
+package ru.below.effective_modile_test.services;
 
-import com.example.ZUZEX_test.models.House;
-import com.example.ZUZEX_test.models.User;
 import org.springframework.expression.AccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.below.effective_modile_test.dto.EmailDTO;
+import ru.below.effective_modile_test.dto.PhoneDTO;
+import ru.below.effective_modile_test.models.Phone;
+import ru.below.effective_modile_test.models.User;
 
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    User getUser(Long id);
-    User updateUser(User user);
-    void deleteUser(Long id) throws AccessException;
-    User getUser(String username);
-    List<User> getUsersByHouseId(House house);
-    void inviteUser(User user, Long houseId);
-    void unInviteUser(User user);
+    String addPhone(String phone) throws AccessException;
+    String updatePhone(PhoneDTO phoneDTO) throws AccessException;
+    String updateEmail(EmailDTO emailDTO) throws AccessException;
+    String addEmail(String email) throws AccessException;
+    String deleteEmail(String email) throws AccessException;
+    String deletePhone(String phone) throws AccessException;
 }

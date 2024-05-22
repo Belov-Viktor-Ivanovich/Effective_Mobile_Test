@@ -1,4 +1,4 @@
-package com.example.ZUZEX_test.dto;
+package ru.below.effective_modile_test.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

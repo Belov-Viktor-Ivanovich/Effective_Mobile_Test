@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EffectiveModileTestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EffectiveModileTestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EffectiveModileTestApplication.class, args);
+    }
 
 }
