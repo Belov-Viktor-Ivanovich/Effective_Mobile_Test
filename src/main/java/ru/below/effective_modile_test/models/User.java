@@ -10,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -34,18 +36,21 @@ public class User implements UserDetails {
     private String name;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
-    //@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name = "account_id",referencedColumnName = "id")
     private Account account;
     @OneToMany(cascade = CascadeType.ALL)
     @NotEmpty
     @Column(unique = true)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Email> emails;
     @Column(unique = true)
     @OneToMany
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @NotEmpty
     private Set<Phone> phones;
+
+    private LocalDate birthday;
 
 
     @Override

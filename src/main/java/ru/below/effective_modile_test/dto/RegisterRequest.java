@@ -9,6 +9,7 @@ import ru.below.effective_modile_test.models.Email;
 import ru.below.effective_modile_test.models.Phone;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +21,5 @@ public class RegisterRequest {
     private BigDecimal accountBalance;
     private String emailsEmail;
     private String phonesPhone;
+    private LocalDate birthDay;
 }

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.below.effective_modile_test.services.impl.UserServiceImpl;
 
+
 @Configuration
 @RequiredArgsConstructor
 
@@ -42,4 +43,5 @@ public class AppConfig {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
 }

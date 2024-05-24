@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.below.effective_modile_test.dto.AccountTransfer;
 import ru.below.effective_modile_test.dto.EmailDTO;
 import ru.below.effective_modile_test.dto.PhoneDTO;
+import ru.below.effective_modile_test.dto.SearchUser;
+import ru.below.effective_modile_test.models.User;
 import ru.below.effective_modile_test.services.AccountService;
 import ru.below.effective_modile_test.services.UserService;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,6 +52,22 @@ public class UserController {
     @PutMapping("/transferAmount")
     public ResponseEntity<String>transferAmount(@RequestBody AccountTransfer accountTransfer) throws AccessException {
         return  ResponseEntity.ok(accountService.transfer(accountTransfer));
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<User>>filterSearch(@RequestBody SearchUser searchUser) throws AccessException {
+        return ResponseEntity.ok(userService.searchUsers(searchUser));
+    }
+   /* @GetMapping("/search/{field}")
+    public ResponseEntity<List<User>>filterSearchField(@RequestBody SearchUser searchUser,@PathVariable(required = false) String field) throws AccessException {
+        return ResponseEntity.ok(userService.findUserWithSorting(searchUser,field));
+    }*/
+    @GetMapping("/search/{field}")
+    public ResponseEntity<List<User>>filterSearchFieldAndPage(@RequestBody SearchUser searchUser,
+                                                              @PathVariable(required = false) String field,
+                                                              @RequestParam(required = false,value = "offset",defaultValue = "0")Integer offset,
+                                                              @RequestParam(required = false,value = "pageSize",defaultValue = "2")Integer pageSize
+                                                              ) throws AccessException {
+        return ResponseEntity.ok(userService.findUserWithSorting(searchUser,field,offset,pageSize));
     }
 
 }

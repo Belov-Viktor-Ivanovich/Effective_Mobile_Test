@@ -8,4 +8,5 @@ import java.math.BigDecimal;
 public class AccountTransfer {
     private String name;
     private BigDecimal amount;
+    private BigDecimal amount2;
 }

@@ -63,6 +63,7 @@ public class AuthenticationService {
                 .account(account)
                 .emails(Set.of(email))
                 .phones(Set.of(phone))
+                .birthday(request.getBirthDay())
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
