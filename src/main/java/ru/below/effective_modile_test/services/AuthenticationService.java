@@ -1,5 +1,6 @@
 package ru.below.effective_modile_test.services;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.Converter;
@@ -52,6 +53,10 @@ public class AuthenticationService {
         return modelMapper.map(registerRequest, Phone.class);
     }
     private final AuthenticationManager authenticationManager;
+    @Operation(
+            summary = "Регистрация пользователя",
+            description = "Позволяет зарегистрировать пользователя"
+    )
     @Transactional
     public AuthenticationResponse register(RegisterRequest request){
         Account account = convertAccountDTOToAccount(request);
@@ -72,7 +77,10 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-
+    @Operation(
+            summary = "Аутентификация пользователя",
+            description = "Позволяет авторизовать пользователя"
+    )
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         System.out.println(request.getName());
         authenticationManager.authenticate(

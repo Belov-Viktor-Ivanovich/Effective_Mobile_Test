@@ -1,5 +1,6 @@
 package ru.below.effective_modile_test.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(description = "Сущность регистрации")
 public class RegisterRequest {
     private String name;
     private String password;

@@ -1,5 +1,8 @@
 package ru.below.effective_modile_test.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.expression.AccessException;
 import org.springframework.http.ResponseEntity;
@@ -17,44 +20,53 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="UserController", description="CRUD, Пагинация, Фильтрация, Сортировка данных")
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService userService;
     private final AccountService accountService;
     @PostMapping("/addPhone/{phone}")
-    public ResponseEntity<String> addPhone(@PathVariable String phone) throws AccessException {
+    @Operation(description = "Позволяет добавлять телефон")
+    public ResponseEntity<String> addPhone(@Parameter(description = "Новый номер телефона") @PathVariable String phone) throws AccessException {
         userService.addPhone(phone);
         return ResponseEntity.ok("Added phone successfully");
     }
     @PutMapping("/updatePhone")
-    public ResponseEntity<String> updatePhone(@RequestBody PhoneDTO phoneDTO) throws AccessException {
+    @Operation(description = "Позволяет изменять телефон")
+    public ResponseEntity<String> updatePhone(@Parameter(description = "Новый номер телефона")@RequestBody PhoneDTO phoneDTO) throws AccessException {
 
         return ResponseEntity.ok(userService.updatePhone(phoneDTO));
     }
     @PutMapping("/updateEmail")
-    public ResponseEntity<String> updateEmail(@RequestBody EmailDTO emailDTO) throws AccessException {
+    @Operation(description = "Позволяет изменять email")
+    public ResponseEntity<String> updateEmail(@Parameter(description = "Новый email")@RequestBody EmailDTO emailDTO) throws AccessException {
 
         return ResponseEntity.ok(userService.updateEmail(emailDTO));
     }
     @PostMapping("/addEmail/{email}")
-    public ResponseEntity<String> addEmail(@PathVariable String email) throws AccessException {
+    @Operation(description = "Позволяет добавлять email")
+    public ResponseEntity<String> addEmail(@Parameter(description = "Новый email")@PathVariable String email) throws AccessException {
         userService.addEmail(email);
         return ResponseEntity.ok("Added email successfully");
     }
     @DeleteMapping("/deleteEmail/{email}")
-    public ResponseEntity<String> deleteEmail(@PathVariable String email) throws AccessException {
+    @Operation(description = "Позволяет удалять email")
+    public ResponseEntity<String> deleteEmail(@Parameter(description = "email для удаления")@PathVariable String email) throws AccessException {
         return ResponseEntity.ok(userService.deleteEmail(email));
     }
     @DeleteMapping("/deletePhone/{phone}")
-    public ResponseEntity<String> deletePhone(@PathVariable String phone) throws AccessException {
+    @Operation(description = "Позволяет удалять телефон")
+    public ResponseEntity<String> deletePhone(@Parameter(description = "телефон для удаления")@PathVariable String phone) throws AccessException {
         return ResponseEntity.ok(userService.deletePhone(phone));
     }
     @PutMapping("/transferAmount")
-    public ResponseEntity<String>transferAmount(@RequestBody AccountTransfer accountTransfer) throws AccessException {
+    @Operation(description = "Позволяет отправить деньги другому пользователю")
+    public ResponseEntity<String>transferAmount(@Parameter(description = "информация по переводу денег")@RequestBody AccountTransfer accountTransfer) throws AccessException {
         return  ResponseEntity.ok(accountService.transfer(accountTransfer));
     }
     @GetMapping("/search")
-    public ResponseEntity<List<User>>filterSearch(@RequestBody SearchUser searchUser) throws AccessException {
+    @Operation(description = "Позволяет фильтровать данные")
+    public ResponseEntity<List<User>>filterSearch(@Parameter(description = "информация по фильтрации")@RequestBody SearchUser searchUser) throws AccessException {
         return ResponseEntity.ok(userService.searchUsers(searchUser));
     }
    /* @GetMapping("/search/{field}")
@@ -62,10 +74,11 @@ public class UserController {
         return ResponseEntity.ok(userService.findUserWithSorting(searchUser,field));
     }*/
     @GetMapping("/search/{field}")
-    public ResponseEntity<List<User>>filterSearchFieldAndPage(@RequestBody SearchUser searchUser,
-                                                              @PathVariable(required = false) String field,
-                                                              @RequestParam(required = false,value = "offset",defaultValue = "0")Integer offset,
-                                                              @RequestParam(required = false,value = "pageSize",defaultValue = "2")Integer pageSize
+    @Operation(description = "Позволяет фильтровать данные и выставлять пагинацию")
+    public ResponseEntity<List<User>>filterSearchFieldAndPage(@Parameter(description = "информация по фильтрации")@RequestBody SearchUser searchUser,
+                                                              @Parameter(description = "поле для фильтрации")@PathVariable(required = false) String field,
+                                                              @Parameter(description = "колл-во страниц")@RequestParam(required = false,value = "offset",defaultValue = "0")Integer offset,
+                                                              @Parameter(description = "колл-во эл-ов на странице")@RequestParam(required = false,value = "pageSize",defaultValue = "2")Integer pageSize
                                                               ) throws AccessException {
         return ResponseEntity.ok(userService.findUserWithSorting(searchUser,field,offset,pageSize));
     }
