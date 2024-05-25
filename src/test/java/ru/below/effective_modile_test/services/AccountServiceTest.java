@@ -40,10 +40,17 @@ class AccountServiceTest extends EffectiveModileTestApplicationTests {
         Assertions.assertEquals("success transfer",test);
     }
     @Test
-    void accountNotHaveFunds() throws AccessException {
+    void accountNotHaveFunds() {
         accountTransfer.setName("user");
         accountTransfer.setFromName("user2");
         accountTransfer.setAmount(BigDecimal.valueOf(1000));
         Assertions.assertThrows(RuntimeException.class,()->accountService.transfer(accountTransfer));
+    }
+    @Test
+    void userNotFound() {
+        accountTransfer.setName("usercddc");
+        accountTransfer.setFromName("user2");
+        accountTransfer.setAmount(BigDecimal.valueOf(10));
+        Assertions.assertThrows(AccessException.class,()->accountService.transfer(accountTransfer));
     }
 }
