@@ -11,8 +11,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(info = @Info(title = "REST API", version = "1.0",
-        description = "REST API description...",
-        contact = @Contact(name = "Name Surname")),
+        description = "Test task for Java-developer",
+        contact = @Contact(name = "Viktor",
+        email = "vibelow@mail.ru",
+        url = "https://github.com/Belov-Viktor-Ivanovich/Effective_Mobile_Test")),
         security = {@SecurityRequirement(name = "bearerToken")}
 )
 @SecuritySchemes({

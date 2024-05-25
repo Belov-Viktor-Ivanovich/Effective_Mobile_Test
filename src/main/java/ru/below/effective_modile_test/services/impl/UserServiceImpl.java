@@ -2,6 +2,7 @@ package ru.below.effective_modile_test.services.impl;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.atn.SemanticContext;
 import org.hibernate.sql.ast.tree.predicate.Predicate;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         user.getPhones().add(new Phone().builder().phone(phone).build());
         userRepository.save(user);
+        log.warn("User {} added phone {}", user.getName(), phone);
         return phone;
     }
 
@@ -61,6 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Phone phone = phoneRepository.findPhonesByPhone(phoneDTO.getPhone()).orElseThrow(() -> new AccessException("phone not found"));
         phone.setPhone(phoneDTO.getNewPhone());
         phoneRepository.save(phone);
+        log.warn("User {} updated phone {}", user.getName(), phoneDTO.getNewPhone());
         return "update phone number";
     }
 
@@ -71,6 +74,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Email email = emailRepository.findEmailsByEmail(emailDTO.getEmail()).orElseThrow(() -> new AccessException("email not found"));
         email.setEmail(emailDTO.getNewEmail());
         emailRepository.save(email);
+        log.warn("User {} updated email {}", user.getName(), emailDTO.getNewEmail());
         return "update email";
     }
 
@@ -80,6 +84,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userRepository.findUsersByName(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new AccessException("user not found"));
         user.getEmails().add(new Email().builder().email(email).build());
         userRepository.save(user);
+        log.warn("User {} added email {}", user.getName(), email);
         return email;
     }
 
@@ -92,8 +97,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             user.getEmails().remove(owner);
             userRepository.save(user);
             emailRepository.delete(owner);
+            log.warn("User {} deleted email {}", user.getName(), email);
             return "delete email " + owner.getEmail();
         }
+        log.warn("User {} One email left {} ,failed to delete", user.getName(), email);
         return "One email left";
     }
 
@@ -106,8 +113,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             user.getPhones().remove(owner);
             userRepository.save(user);
             phoneRepository.delete(owner);
+            log.warn("User {} deleted phone {}", user.getName(), phone);
             return "delete phone " + owner.getPhone();
         }
+        log.warn("User {} One phone left {} ,failed to delete", user.getName(), phone);
         return "One phone left";
     }
 
