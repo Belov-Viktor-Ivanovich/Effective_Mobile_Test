@@ -21,7 +21,7 @@ public class PhoneController {
 
     @PostMapping("/phone/{phone}")
     @Operation(description = "Позволяет добавлять телефон")
-    public ResponseEntity<String> addPhone(@Parameter(description = "Новый номер телефона") @PathVariable String phone) throws AccessException {
+    public ResponseEntity<String> addPhone(@Parameter(description = "Новый номер телефона, ко-во цифр от 7 до 12") @PathVariable String phone) throws AccessException {
         phoneService.addPhone(phone);
         log.warn("added phone {}", phone);
         return ResponseEntity.ok("Added phone successfully");
@@ -29,7 +29,7 @@ public class PhoneController {
 
     @PutMapping("/phone")
     @Operation(description = "Позволяет изменять телефон")
-    public ResponseEntity<String> updatePhone(@Parameter(description = "Новый номер телефона") @RequestBody PhoneDTO phoneDTO) throws AccessException {
+    public ResponseEntity<String> updatePhone(@Parameter(description = "Новый номер телефона, ко-во цифр от 7 до 12") @RequestBody PhoneDTO phoneDTO) throws AccessException {
         var result = phoneService.updatePhone(phoneDTO);
         log.warn("updated phone {}", phoneDTO.getNewPhone());
         return ResponseEntity.ok(result);

@@ -1,6 +1,7 @@
 package ru.below.effective_modile_test.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.UUID;
@@ -18,5 +19,6 @@ public class Email {
     private UUID id;
     @Column(unique = true, nullable = false)
     @org.hibernate.validator.constraints.Email
+    @Size(min = 3, max = 30)
     private String email;
 }

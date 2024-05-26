@@ -21,7 +21,7 @@ public class EmailController {
 
     @PutMapping("/email")
     @Operation(description = "Позволяет изменять email")
-    public ResponseEntity<String> updateEmail(@Parameter(description = "Новый email") @RequestBody EmailDTO emailDTO) throws AccessException {
+    public ResponseEntity<String> updateEmail(@Parameter(description = "Новый email, кол-во символов до 30") @RequestBody EmailDTO emailDTO) throws AccessException {
         var result = emailService.updateEmail(emailDTO);
         log.warn("updated email {}", emailDTO.getNewEmail());
         return ResponseEntity.ok(result);
@@ -29,7 +29,7 @@ public class EmailController {
 
     @PostMapping("/email/{email}")
     @Operation(description = "Позволяет добавлять email")
-    public ResponseEntity<String> addEmail(@Parameter(description = "Новый email") @PathVariable String email) throws AccessException {
+    public ResponseEntity<String> addEmail(@Parameter(description = "Новый email, кол-во символов до 30") @PathVariable String email) throws AccessException {
         var result = emailService.addEmail(email);
         log.warn("added email {}", email);
         return ResponseEntity.ok("Added email " + result);
