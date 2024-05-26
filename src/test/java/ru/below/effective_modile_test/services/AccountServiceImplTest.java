@@ -24,10 +24,9 @@ class AccountServiceImplTest extends EffectiveModileTestApplicationTests {
 
     @Test
     void accountHaveFunds() throws AccessException {
-
         accountTransfer.setName("user");
         accountTransfer.setFromName("user2");
-        accountTransfer.setAmount(BigDecimal.valueOf(100));
+        accountTransfer.setAmount(BigDecimal.valueOf(1));
         String test = accountServiceImpl.transfer(accountTransfer);
         Assertions.assertEquals("success transfer",test);
     }
@@ -35,14 +34,14 @@ class AccountServiceImplTest extends EffectiveModileTestApplicationTests {
     void accountNotHaveFunds() {
         accountTransfer.setName("user");
         accountTransfer.setFromName("user2");
-        accountTransfer.setAmount(BigDecimal.valueOf(1000));
+        accountTransfer.setAmount(BigDecimal.valueOf(Integer.MAX_VALUE));
         Assertions.assertThrows(RuntimeException.class,()-> accountServiceImpl.transfer(accountTransfer));
     }
     @Test
     void userNotFound() {
-        accountTransfer.setName("usercddc");
+        accountTransfer.setName("bla-bla-bla-bla");
         accountTransfer.setFromName("user2");
-        accountTransfer.setAmount(BigDecimal.valueOf(10));
+        accountTransfer.setAmount(BigDecimal.valueOf(1));
         Assertions.assertThrows(AccessException.class,()-> accountServiceImpl.transfer(accountTransfer));
     }
 }

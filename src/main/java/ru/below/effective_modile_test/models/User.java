@@ -1,17 +1,13 @@
 package ru.below.effective_modile_test.models;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -28,16 +24,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    /*private String lastname;
-    private String firstname;
-    private String patronymic;*/
     @NotEmpty
     @Column(unique = true)
     private String name;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
     @OneToMany(cascade = CascadeType.ALL)
     @NotEmpty

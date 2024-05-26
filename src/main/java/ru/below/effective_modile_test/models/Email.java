@@ -16,7 +16,6 @@ public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    //@jakarta.validation.constraints.Email
     @Column(unique = true, nullable = false)
     @org.hibernate.validator.constraints.Email
     private String email;

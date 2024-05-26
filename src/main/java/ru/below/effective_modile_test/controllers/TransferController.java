@@ -15,13 +15,14 @@ import ru.below.effective_modile_test.services.impl.AccountServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name="UserController", description="Money transfer")
+@Tag(name = "UserController", description = "Money transfer")
 @RequestMapping("/api/v1/transfer")
 public class TransferController {
     private final AccountServiceImpl accountServiceImpl;
+
     @PutMapping("/transferAmount")
     @Operation(description = "Позволяет отправить деньги другому пользователю")
-    public ResponseEntity<String> transferAmount(@Parameter(description = "информация по переводу денег")@RequestBody AccountTransfer accountTransfer) throws AccessException {
-        return  ResponseEntity.ok(accountServiceImpl.transfer(accountTransfer));
+    public ResponseEntity<String> transferAmount(@Parameter(description = "информация по переводу денег") @RequestBody AccountTransfer accountTransfer) throws AccessException {
+        return ResponseEntity.ok(accountServiceImpl.transfer(accountTransfer));
     }
 }

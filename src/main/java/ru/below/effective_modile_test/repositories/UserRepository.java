@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
-    List<User> findAllBy();
     Optional<User> findUsersByName(String name);
+
     @Query("select ac from User ac where ac.birthday>= :birthDay")
-    public List<User>indAllSuitableForInterestBirthDay(LocalDate birthDay);
+    List<User> indAllSuitableForInterestBirthDay(LocalDate birthDay);
+
     @Query("SELECT ac FROM User ac WHERE ac.name LIKE :username%")
     List<User> findByUsernameStartsWith(@Param("username") String username);
 

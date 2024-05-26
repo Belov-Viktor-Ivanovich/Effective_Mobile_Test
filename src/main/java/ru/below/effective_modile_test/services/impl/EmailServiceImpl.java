@@ -25,7 +25,6 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Transactional
     public String updateEmail(EmailDTO emailDTO) throws AccessException {
-        //User user = userRepository.findUsersByName(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new AccessException("user not found"));
         Email email = emailRepository.findEmailsByEmail(emailDTO.getEmail()).orElseThrow(() -> new AccessException("email not found"));
         email.setEmail(emailDTO.getNewEmail());
         emailRepository.save(email);

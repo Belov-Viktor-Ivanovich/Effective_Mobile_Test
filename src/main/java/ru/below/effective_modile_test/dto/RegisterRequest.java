@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.below.effective_modile_test.models.Account;
-import ru.below.effective_modile_test.models.Email;
-import ru.below.effective_modile_test.models.Phone;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

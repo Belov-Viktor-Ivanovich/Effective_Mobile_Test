@@ -10,32 +10,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.below.effective_modile_test.dto.EmailDTO;
 import ru.below.effective_modile_test.services.EmailService;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Tag(name="EmailController", description="CRUD Email")
+@Tag(name = "EmailController", description = "CRUD Email")
 @RequestMapping("/api/v1/emails")
 public class EmailController {
     private final EmailService emailService;
-    @PutMapping("/updateEmail")
+
+    @PutMapping("/email")
     @Operation(description = "Позволяет изменять email")
-    public ResponseEntity<String> updateEmail(@Parameter(description = "Новый email")@RequestBody EmailDTO emailDTO) throws AccessException {
+    public ResponseEntity<String> updateEmail(@Parameter(description = "Новый email") @RequestBody EmailDTO emailDTO) throws AccessException {
         var result = emailService.updateEmail(emailDTO);
-        log.warn("updated email {}",emailDTO.getNewEmail());;
+        log.warn("updated email {}", emailDTO.getNewEmail());
         return ResponseEntity.ok(result);
     }
-    @PostMapping("/addEmail/{email}")
+
+    @PostMapping("/email/{email}")
     @Operation(description = "Позволяет добавлять email")
-    public ResponseEntity<String> addEmail(@Parameter(description = "Новый email")@PathVariable String email) throws AccessException {
+    public ResponseEntity<String> addEmail(@Parameter(description = "Новый email") @PathVariable String email) throws AccessException {
         var result = emailService.addEmail(email);
-        log.warn("added email {}",email);
-        return ResponseEntity.ok("Added email "+result);
+        log.warn("added email {}", email);
+        return ResponseEntity.ok("Added email " + result);
     }
-    @DeleteMapping("/deleteEmail/{email}")
+
+    @DeleteMapping("/email/{email}")
     @Operation(description = "Позволяет удалять email")
-    public ResponseEntity<String> deleteEmail(@Parameter(description = "email для удаления")@PathVariable String email) throws AccessException {
+    public ResponseEntity<String> deleteEmail(@Parameter(description = "email для удаления") @PathVariable String email) throws AccessException {
         var result = emailService.deleteEmail(email);
-        log.warn("deleted email {}",email);
+        log.warn("deleted email {}", email);
         return ResponseEntity.ok(result);
     }
 }

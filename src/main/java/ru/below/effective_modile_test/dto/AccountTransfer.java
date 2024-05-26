@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+
 @Schema(description = "Сущность для транзакции")
 @Data
 @Component

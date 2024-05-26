@@ -35,9 +35,9 @@ public class AddBalanceJob {
         for (Account account : accounts) {
             BigDecimal maxBalance = account.getInitialBalance().multiply(MAX_LIMIT);
             BigDecimal balance = account.getBalance().multiply(PERCENT_BONUS);
-            if (balance.compareTo(maxBalance) <= 0){
+            if (balance.compareTo(maxBalance) <= 0) {
                 account.setBalance(balance);
-                log.info("Balance update, new balance {}",account.getBalance());
+                log.info("Balance update, new balance {}", account.getBalance());
             }
         }
         accountRepository.saveAll(accounts);

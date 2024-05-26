@@ -20,14 +20,14 @@ import ru.below.effective_modile_test.services.AccountService;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
+
     @Transactional
     @Override
     public String transfer(AccountTransfer request) throws AccessException {
-        User user ;
-        if(request.getFromName()==null) {
+        User user;
+        if (request.getFromName() == null) {
             user = userRepository.findUsersByName(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new AccessException("user not found"));
-        }
-        else {
+        } else {
             user = userRepository.findUsersByName(request.getFromName()).orElseThrow(() -> new AccessException("FromUser Transfer not found"));
         }
         User userTo = userRepository.findUsersByName(request.getName()).orElseThrow(() -> new AccessException("ToUser Transfer not found"));
@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
         to.addBalance(request.getAmount());
         accountRepository.save(from);
         accountRepository.save(to);
-        log.warn("the {} transferred {} to the {}",user.getName(),request.getAmount(),userTo.getName());
+        log.warn("the {} transferred {} to the {}", user.getName(), request.getAmount(), userTo.getName());
         return "success transfer";
     }
 }

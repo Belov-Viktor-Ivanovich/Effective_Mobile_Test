@@ -18,6 +18,6 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(unique = true, nullable = false)
-    @Pattern(regexp="^(0|[1-9][0-9]*)$",message = "not is number")
+    @Pattern(regexp = "^(0|[1-9][0-9]*)$", message = "not is number")
     private String phone;
 }
